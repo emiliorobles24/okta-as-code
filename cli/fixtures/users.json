@@ -1,0 +1,35 @@
+[
+  {
+    "id": "00u1aaaaaaaaaaaaa001",
+    "status": "ACTIVE",
+    "profile": {
+      "login": "avery.chen@example.com",
+      "firstName": "Avery",
+      "lastName": "Chen",
+      "department": "Finance",
+      "employmentType": "FTE"
+    }
+  },
+  {
+    "id": "00u1aaaaaaaaaaaaa002",
+    "status": "ACTIVE",
+    "profile": {
+      "login": "jordan.smith@example.com",
+      "firstName": "Jordan",
+      "lastName": "Smith",
+      "department": "Engineering",
+      "employmentType": "FTE"
+    }
+  },
+  {
+    "id": "00u1aaaaaaaaaaaaa003",
+    "status": "SUSPENDED",
+    "profile": {
+      "login": "c-riley.vendor@example.com",
+      "firstName": "Riley",
+      "lastName": "Vendor",
+      "department": "IT",
+      "employmentType": "CONTRACTOR"
+    }
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "00g1bbbbbbbbbbbbb001",
+    "profile": {
+      "name": "birthright-all-fte",
+      "description": "Baseline apps for all full-time employees"
+    }
+  },
+  {
+    "id": "00g1bbbbbbbbbbbbb002",
+    "profile": {
+      "name": "birthright-contractor",
+      "description": "Reduced baseline for contractors"
+    }
+  },
+  {
+    "id": "00g1bbbbbbbbbbbbb003",
+    "profile": {
+      "name": "vendor-acme-killswitch",
+      "description": "Blast-radius group: disable to cut all Acme vendor access"
+    }
+  }
+]
