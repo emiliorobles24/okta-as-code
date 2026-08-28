@@ -17,9 +17,35 @@ okta-as-code/
 │   │                      # custom profile attributes, app assignments, contractor population
 │   └── contractors.tf     # The contractor lifecycle layer: sponsor accountability,
 │                          # vendor blast-radius groups, reduced birthright, tighter sign-on
-└── workflows/
-    └── leaver-flow.md     # The leaver automation, card by card: kill-switch,
-                           # contractor expiry, and deprovision-drift reconciliation
+├── workflows/
+│   └── leaver-flow.md     # The leaver automation, card by card: kill-switch,
+│                          # contractor expiry, and deprovision-drift reconciliation
+└── cli/
+    ├── okta_cli.py        # Read-only lookup CLI; credential fetched at runtime
+    │                      # from 1Password (op CLI) — never from a file or .env
+    ├── fixtures/          # Mock tenant data so the CLI runs with no credential
+    └── test_okta_cli.py   # 7 tests, all runnable offline (python3 -m unittest discover cli)
+```
+
+## The read-only CLI (`cli/`)
+
+A small operational companion to the Terraform: quick user/group lookups from the
+terminal. The lookups are ordinary; **the credential pattern is the point**:
+
+- The Okta API token is retrieved **at runtime** from a secrets manager
+  (1Password via `op read op://IT/okta-api-token/credential`) and held only in
+  process memory. It is never hardcoded, never in a `.env`, never on disk.
+- Fallback to an `OKTA_API_TOKEN` environment variable exists **for CI only**,
+  and with no credential available the tool fails loudly rather than partially.
+- **Read-only by design**: every request is a GET. A lookup tool has no business
+  holding a write-capable token — scope the token read-only in Okta too, so the
+  boundary is enforced on both ends.
+
+```bash
+python3 cli/okta_cli.py --mock users            # try it with fixtures, no tenant needed
+OKTA_ORG_URL=https://yourorg.okta.com \
+  python3 cli/okta_cli.py users --search jsmith # real lookup; token comes from 1Password
+python3 -m unittest discover cli                # 7 tests, offline
 ```
 
 ## The architecture this implements
